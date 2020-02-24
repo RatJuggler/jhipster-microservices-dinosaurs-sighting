@@ -1,0 +1,32 @@
+version: '2'
+services:
+  sighting-app:
+    image: sighting
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      - SPRING_DATA_MONGODB_URI=mongodb://sighting-mongodb:27017
+      - SPRING_DATA_MONGODB_DATABASE=sighting
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - SPRING_DATA_JEST_URI=http://sighting-elasticsearch:9200
+      - SPRING_ELASTICSEARCH_REST_URIS=http://sighting-elasticsearch:9200
+  sighting-mongodb:
+    extends:
+      file: mongodb.yml
+      service: sighting-mongodb
+  sighting-elasticsearch:
+    extends:
+      file: elasticsearch.yml
+      service: sighting-elasticsearch
+  consul:
+    extends:
+      file: consul.yml
+      service: consul
+
+  consul-config-loader:
+    extends:
+      file: consul.yml
+      service: consul-config-loader
