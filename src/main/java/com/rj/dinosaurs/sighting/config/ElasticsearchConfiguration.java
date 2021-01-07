@@ -20,7 +20,6 @@ import org.springframework.data.elasticsearch.core.mapping.SimpleElasticsearchPe
 import org.springframework.data.mapping.PersistentEntity;
 import org.springframework.data.mapping.model.Property;
 import org.springframework.data.mapping.model.SimpleTypeHolder;
-import org.springframework.data.elasticsearch.core.convert.MappingElasticsearchConverter;
 import org.springframework.data.elasticsearch.core.mapping.SimpleElasticsearchPersistentEntity;
 import org.springframework.data.mapping.MappingException;
 
@@ -44,15 +43,20 @@ public class ElasticsearchConfiguration {
     }
 
     @Bean
+    SimpleElasticsearchMappingContext mappingContext() {
+        return new CustomElasticsearchMappingContext();
+    }
+
+    @Bean
     @Primary
-    public ElasticsearchOperations elasticsearchTemplate(final JestClient jestClient,
-                                                         final ElasticsearchConverter elasticsearchConverter,
-                                                         EntityMapper mapper) {
-        CustomElasticsearchMappingContext mappingContext = new CustomElasticsearchMappingContext();
+    public ElasticsearchOperations elasticsearchTemplate(JestClient jestClient,
+                                                         ElasticsearchConverter elasticsearchConverter,
+                                                         SimpleElasticsearchMappingContext mappingContext,
+                                                         EntityMapper entityMapper) {
         return new JestElasticsearchTemplate(
             jestClient,
-            new MappingElasticsearchConverter(mappingContext),
-            new DefaultJestResultsMapper(mappingContext, mapper));
+            elasticsearchConverter,
+            new DefaultJestResultsMapper(mappingContext, entityMapper));
     }
 
     public class CustomEntityMapper implements EntityMapper {
@@ -88,7 +92,7 @@ public class ElasticsearchConfiguration {
         }
 
         @Override
-        public <T> T readObject (Map<String, Object> source, Class<T> targetType) {
+        public <T> T readObject(Map<String, Object> source, Class<T> targetType) {
             try {
                 return mapToObject(mapToString(source), targetType);
             } catch (IOException e) {
@@ -99,6 +103,9 @@ public class ElasticsearchConfiguration {
 
 }
 
+/**
+ * Custom mapping context in order to use the same entities for both MongoDB and Elasticsearch datasources
+ */
 class CustomElasticsearchMappingContext extends SimpleElasticsearchMappingContext {
 
     @Override

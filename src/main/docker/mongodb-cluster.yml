@@ -1,16 +1,16 @@
 version: '2'
 services:
   sighting-mongodb:
-    image: mongo:4.0.16
+    image: mongo:4.2.7
     ports:
       - '27017:27017'
-    command: mongos --configdb sighting-mongodb-config
+    command: mongos --configdb csvr/sighting-mongodb-config --bind_ip 0.0.0.0
   sighting-mongodb-node:
     build:
       context: .
       dockerfile: mongodb/MongoDB.Dockerfile
-    command: mongod --replSet rs1 --noprealloc --smallfiles
+    command: mongod --shardsvr --replSet rs1
   sighting-mongodb-config:
-    image: mongo:4.0.16
+    image: mongo:4.2.7
     container_name: sighting-mongodb-config
-    command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db
+    command: mongod --configsvr --dbpath /data/db --replSet csvr

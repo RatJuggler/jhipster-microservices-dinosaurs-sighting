@@ -1,82 +1,63 @@
 {
-    "name": "Sighting",
-    "fields": [
-        {
-            "fieldName": "dinosaur",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required",
-                "min"
-            ],
-            "fieldValidateRulesMin": "0"
-        },
-        {
-            "fieldName": "byUser",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required",
-                "min"
-            ],
-            "fieldValidateRulesMin": "0"
-        },
-        {
-            "fieldName": "whenDt",
-            "fieldType": "Instant",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "lat",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "lng",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "number",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "min",
-                "max"
-            ],
-            "fieldValidateRulesMin": "0",
-            "fieldValidateRulesMax": "999"
-        },
-        {
-            "fieldName": "heading",
-            "fieldType": "Heading",
-            "fieldValues": "STATIONARY,NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST"
-        },
-        {
-            "fieldName": "notes",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": "64"
-        }
-    ],
-    "relationships": [],
-    "changelogDate": "20200224160706",
-    "entityTableName": "sighting",
-    "dto": "no",
-    "pagination": "infinite-scroll",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "clientRootFolder": "",
-    "applications": [
-        "gateway",
-        "sighting"
-    ],
-    "searchEngine": "elasticsearch"
+  "name": "Sighting",
+  "fields": [
+    {
+      "fieldName": "dinosaur",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "byUser",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "whenDt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lat",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lng",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMin": "0",
+      "fieldValidateRulesMax": "999"
+    },
+    {
+      "fieldName": "heading",
+      "fieldType": "Heading",
+      "fieldValues": "STATIONARY,NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210107191515",
+  "entityTableName": "sighting",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["gateway", "sighting"],
+  "searchEngine": "elasticsearch"
 }

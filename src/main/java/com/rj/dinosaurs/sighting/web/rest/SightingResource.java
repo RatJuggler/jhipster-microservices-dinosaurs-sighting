@@ -69,7 +69,7 @@ public class SightingResource {
         Sighting result = sightingRepository.save(sighting);
         sightingSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/sightings/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId()))
             .body(result);
     }
 
@@ -91,7 +91,7 @@ public class SightingResource {
         Sighting result = sightingRepository.save(sighting);
         sightingSearchRepository.save(result);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, sighting.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, sighting.getId()))
             .body(result);
     }
 
@@ -150,5 +150,5 @@ public class SightingResource {
         Page<Sighting> page = sightingSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+        }
 }

@@ -37,9 +37,6 @@ spring:
     allow-bean-definition-overriding: true
   messages:
     basename: i18n/messages
-  mvc:
-    favicon:
-      enabled: false
   task:
     execution:
       thread-name-prefix: sighting-task-
@@ -69,7 +66,7 @@ jhipster:
     name: 'sightingApp'
   logging:
     # To test json console appender
-    use-json-format: true # By default, logs are in Json format
+    use-json-format: false
     logstash:
       enabled: false
       host: localhost
@@ -79,7 +76,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: ZGQxMDJjN2NiZTcxY2M0ZDk4MzM5OGQ1M2EyMmY1MGI0NDQ1NGE5MmViODliNDkwMTgzZjdmOWYyNWNlZDg0ODE0NzY2ZTk1YWVhNGNlM2VlMjE5N2Q0NWMzZDE4ZWMxYTk5M2E2YWEzMDM5ZWQxMGRjOTRjODllYjNlOWVkM2U=
+        base64-secret: ODdiYWQ1ZjA4MDg5NjAxODhmOTI0N2Q1ZTcwZWY3ZmIyMWYwMmU1NTNmMDJiZDAwMDQzMTM5YTdhNmE5NjRkNzk4NmJlNTA3Mjc3ODQ2MTMwNmVkOWJmOTg1ZmVjMjQ1ZDU3NzZmOTk1YjQyZTI1MDE2OTM3ZTg5ZTFmMjJlNDQ=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
   metrics:
